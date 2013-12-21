@@ -8,6 +8,49 @@
         return a + d;
     }
 
+    function ang2pix_ring(theta, phi) {
+        // nside is hardwired for now
+        var nside = 64;
+        var pion2 = Math.PI/2.;
+        var twopi = Math.PI*2.;
+        var nl2 = 2*nside;
+        var nl4 = 4*nside;
+        var npix = 12*nside*nside;
+        var ncap = nl2*(nside-1);
+
+        var cth0 = 2./3.;
+        var cth_in = Math.cos(theta);
+        var phi_in = phi % twopi;
+        if (phi_in <= 0) {
+            phi_in = phi_in + twopi;
+        }
+     
+        var is_eqt = (cth_in <= cth0) && (cth_in > -cth0);
+        var is_np = (cth_in > cth0);
+        var is_sp = (cth_in <= -cth0);
+
+        if (is_eqt) {
+            var tt = phi_in/pion2;
+            var jp = ~~(nside*(0.5 + tt - cth_in*0.75));
+            var jm = ~~(nside*(0.5 + tt + cth_in*0.75));
+
+            var ir = (nside + 1) + jp - jm;
+            var k = +((ir % 2) == 0);
+
+            var ip = ((jp+jm+k+(1-nside))/2) + 1;
+            var ip = ~~(ip - nl4*(+(ip > nl4)));
+
+            var ipring = ncap + nl4*(ir-1) + ip - 1;
+        }
+        if (is_np) {
+            var ipring = -1;
+        }
+        if (is_sp) {
+            var ipring = -1;
+        }
+        return ipring;
+    }
+
     function ad2tp(a, d) {
         // convert (ra,dec) to (theta, phi)
         var theta = (90.-d)/radeg;
@@ -21,9 +64,10 @@
         if (isNaN(a) || isNaN(d) || (a < 0) || (a > 360) || (d < -90) || (d > 90)) {
             var s = "invalid input";
         } else {
-            var s = doMath(a,d);
+            var tp = ad2tp(a,d);
+            var s = ang2pix_ring(tp[0], tp[1]);
         }
-        document.getElementById("calc").innerHTML = s;
+        document.getElementById("calc").innerHTML = "healpix pixel: " + String(s);
     }
 </script>
 <body>
