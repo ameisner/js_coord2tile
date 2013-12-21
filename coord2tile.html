@@ -6,6 +6,14 @@
         return a + d;
     }
 
+    function ad2tp(a, d) {
+        // convert (ra,dec) to (theta, phi)
+        var radeg = 180./Math.PI;
+        var theta = (90.-d)/radeg;
+        var phi = a/radeg;
+        return [theta, phi];
+    }
+
     function displayTile() {
         var a = parseFloat(document.getElementById("ra").value);
         var d = parseFloat(document.getElementById("dec").value);
