@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<script>
+    function myFunction() {
+        var a = parseFloat(document.getElementById("ra").value);
+        var d = parseFloat(document.getElementById("dec").value);
+        var s = a + d;
+        document.getElementById("demo").innerHTML = s;
+    }
+</script>
+<body>
+    
+<h1>Calculator</h1>
+
+    <form>
+        <table>
+            <tr>
+                <td>RA (degrees J2000):
+                    <input type="text" id="ra">
+                </td>
+                <td>Dec (degrees J2000):
+                    <input type="text" id="dec">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <p id="demo">output</p>
+    <button type="button" onclick="myFunction()">Calculate</button>
+</body>
+</html>
