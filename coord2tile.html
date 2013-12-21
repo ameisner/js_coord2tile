@@ -59,7 +59,20 @@
             var ipring = 2*ir*(ir-1) + ip - 1;
         }
         if (is_sp) {
-            var ipring = -1;
+            var tt = phi_in/pion2;
+
+            var tp = (tt % 1.);
+            var tmp = Math.sqrt(3.*(1.-Math.abs(cth_in)));
+
+            var jp = ~~(nside*tp*tmp);
+            var jm = ~~(nside*(1.-tp)*tmp);
+
+            var ir = jp + jm + 1;
+            var ip = ~~(tt*ir) + 1;
+            var ir4 = 4*ir;
+            var ip = ip - ir4*(+(ip > ir4));
+
+            var ipring = npix - 2*ir*(ir+1) + ip - 1;
         }
         return ipring;
     }
