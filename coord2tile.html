@@ -2,11 +2,19 @@
 <html>
 <head></head>
 <script>
-    function myFunction() {
+    function doMath(a, d) {
+        return a + d;
+    }
+
+    function displayTile() {
         var a = parseFloat(document.getElementById("ra").value);
         var d = parseFloat(document.getElementById("dec").value);
-        var s = a + d;
-        document.getElementById("demo").innerHTML = s;
+        if (isNaN(a) || isNaN(d) || (a < 0) || (a > 360) || (d < -90) || (d > 90)) {
+            var s = "invalid input";
+        } else {
+            var s = doMath(a,d);
+        }
+        document.getElementById("calc").innerHTML = s;
     }
 </script>
 <body>
@@ -25,7 +33,7 @@
             </tr>
         </table>
     </form>
-    <p id="demo">output</p>
-    <button type="button" onclick="myFunction()">Calculate</button>
+    <p id="calc">output</p>
+    <button type="button" onclick="displayTile()">Calculate</button>
 </body>
 </html>
