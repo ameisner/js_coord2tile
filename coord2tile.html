@@ -2,13 +2,14 @@
 <html>
 <head></head>
 <script>
+    var radeg = 180./Math.PI;
+
     function doMath(a, d) {
         return a + d;
     }
 
     function ad2tp(a, d) {
         // convert (ra,dec) to (theta, phi)
-        var radeg = 180./Math.PI;
         var theta = (90.-d)/radeg;
         var phi = a/radeg;
         return [theta, phi];
