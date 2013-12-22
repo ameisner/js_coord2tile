@@ -31,3 +31,4 @@ for i in range(npix):
         f.write(',')
 
 f.write(']')
+f.close()
