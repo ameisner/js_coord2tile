@@ -1254,10 +1254,6 @@
                 1,4,3,1,1,5,4,1,6,5,1,1,7,6,1,8,7,1,1,9,8,1,2,9,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
-    function doMath(a, d) {
-        return a + d;
-    }
-
     function ang2pix_ring(theta, phi) {
         // nside is hardwired for now
         var nside = 64;
@@ -1342,14 +1338,14 @@
         } else {
             var tp = ad2tp(a,d);
             var pix = ang2pix_ring(tp[0], tp[1]);
-            var s = tnum[pix];
+            var s = "WSSA tile number: " + String(tnum[pix]);
         }
-        document.getElementById("calc").innerHTML = "WSSA tile number: " + String(s);
+        document.getElementById("calc").innerHTML = s;
     }
 </script>
 <body>
     
-<h1>Calculator</h1>
+<h1>(RA, Dec) to WSSA Tile Calculator</h1>
 
     <form>
         <table>
@@ -1363,7 +1359,7 @@
             </tr>
         </table>
     </form>
-    <p id="calc">output</p>
-    <button type="button" onclick="displayTile()">Calculate</button>
+    <p id="calc"> </p>
+    <button type="button" onclick="displayTile()">Find your tile!</button>
 </body>
 </html>
