@@ -1328,7 +1328,7 @@
     function _pad(tnum) {
         // convert integer to string, padding with leading zeros
         strnum = String(tnum);
-        len = strnum.length
+        len = strnum.length;
         tot = 3; // desired length including padding zeros
         for (var i=0;i<(tot-len);i++) {
             strnum = '0' + strnum;
@@ -1366,7 +1366,7 @@
             document.getElementById("link").innerHTML =  "wise_" +_pad(tnum[pix]) + ".fits.gz";
             document.getElementById("link").href = "http://faun.rc.fas.harvard.edu/ameisner/wssa/v1.0/wise_" + _pad(tnum[pix]) + ".fits.gz";
             tb = document.createTextNode("Download ");
-            ta = document.createTextNode(" now! (1.1GB)")
+            ta = document.createTextNode(" now! (1.1GB)");
             var link = document.getElementById("link");
             link.parentNode.insertBefore(tb, link);
             link.parentNode.insertBefore(ta, link.nextSibling);
