@@ -1325,6 +1325,17 @@
         return ipring;
     }
 
+    function _pad(tnum) {
+        // convert integer to string, padding with leading zeros
+        strnum = String(tnum);
+        len = strnum.length
+        tot = 3; // desired length including padding zeros
+        for (var i=0;i<(tot-len);i++) {
+            strnum = '0' + strnum;
+        }
+        return strnum;
+    }
+
     function ad2tp(a, d) {
         // convert (ra,dec) to (theta, phi)
         var theta = (90.-d)/radeg;
@@ -1332,15 +1343,33 @@
         return [theta, phi];
     }
 
+    var tb = null;
+    var ta = null;
     function displayTile() {
+        if (tb !== null) {
+            tb.parentNode.removeChild(tb);
+            ta.parentNode.removeChild(ta);
+        }
+
         var a = parseFloat(document.getElementById("ra").value);
         var d = parseFloat(document.getElementById("dec").value);
+        
         if (isNaN(a) || isNaN(d) || (a < 0) || (a > 360) || (d < -90) || (d > 90)) {
             var s = "invalid input";
+            tb = null;
+            ta = null;
+            document.getElementById("link").innerHTML = "";
         } else {
             var tp = ad2tp(a,d);
             var pix = ang2pix_ring(tp[0], tp[1]);
             var s = "WSSA tile number: " + String(tnum[pix]);
+            document.getElementById("link").innerHTML =  "wise_" +_pad(tnum[pix]) + ".fits.gz";
+            document.getElementById("link").href = "http://faun.rc.fas.harvard.edu/ameisner/wssa/v1.0/wise_" + _pad(tnum[pix]) + ".fits.gz";
+            tb = document.createTextNode("Download ");
+            ta = document.createTextNode(" now! (1.1GB)")
+            var link = document.getElementById("link");
+            link.parentNode.insertBefore(tb, link);
+            link.parentNode.insertBefore(ta, link.nextSibling);
         }
         document.getElementById("calc").innerHTML = s;
     }
@@ -1362,6 +1391,7 @@
         </table>
     </form>
     <p id="calc"> </p>
+    <p><a id="link" href=""> </a></p>
     <button type="button" onclick="displayTile()">Find your tile!</button>
 </body>
 </html>
