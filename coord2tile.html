@@ -1258,6 +1258,8 @@
 
     function ang2pix_ring(theta, phi) {
         // nside is hardwired for now
+        // not vectorized
+        // Written by Aaron Meisner, Harvard CfA, 12/21/2013
         var nside = 64;
         var pion2 = Math.PI/2.;
         var twopi = Math.PI*2.;
@@ -1375,7 +1377,11 @@
     }
 </script>
 <body BGCOLOR="#000000" TEXT="#FFFFFF" LINK="#FFFFFF" VLINK="#FFFFFF">
-    
+
+<font size=+2><em>WISE 12 micron full-sky dust map</em><br><p></font>
+
+<hr>
+
 <h1>(RA, Dec) to WSSA Tile Calculator</h1>
 
     <form>
@@ -1393,5 +1399,13 @@
     <p id="calc"> </p>
     <p><a id="link" href=""> </a></p>
     <button type="button" onclick="displayTile()">Find your tile!</button>
+
+<p>
+<HR>
+<font size=-1>
+<ADDRESS> Aaron Meisner, &#x202e;ude.dravrah.saf@rensiema </ADDRESS>
+<ADDRESS> Doug Finkbeiner, &#x202e;ude.dravrah.afc@reniebknifd</ADDRESS>
+</font>
+
 </body>
 </html>
